@@ -8,6 +8,7 @@ authors = ["Artem Jasan <artjasan@gmail.com>"]
 python = "^3.10"
 fastapi = "pytest"
 uvicorn = "^0.17.6"
+SQLAlchemy = "^1.4.37"
 
 [tool.poetry.dev-dependencies]
 
