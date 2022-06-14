@@ -1,7 +1,7 @@
 from sqlalchemy import (Column, ForeignKey, Integer, String, Date, UniqueConstraint)
 from sqlalchemy.orm import relationship
 
-from app.database.database import Base
+from .base import Base
 
 
 class Education(Base):

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel, Field, validator
 
@@ -25,6 +25,14 @@ class ProfileCreate(ProfileBase):
     pass
 
 
+class ProfileUpdate(ProfileBase):
+    links: list[link.LinkDB] = []
+    educations: list[education.EducationDB] = []
+    experiences: list[experience.ExperienceDB] = []
+    skills: list[skill.SkillDB] = []
+    updated_up: datetime
+
+
 class ProfileDB(ProfileBase):
     id: int = ...
     user_id: int = ...
@@ -32,6 +40,8 @@ class ProfileDB(ProfileBase):
     educations: list[education.EducationDB] = []
     experiences: list[experience.ExperienceDB] = []
     skills: list[skill.SkillDB] = []
+    created_at: datetime
+    updated_up: datetime
 
     class Config:
         orm_mode = True

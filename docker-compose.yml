@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  web_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ./entrypoint.sh
+    env_file:
+      - local.env
+    volumes:
+      - ./backend/app:/web_app/backend/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    expose:
+      - 5432
+    healthcheck:
+      test: pg_isready -U postgres
+      timeout: 20s
+      retries: 3
+    container_name: backend_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  pg_admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - "5050:5050"
+    restart: unless-stopped
+    container_name: backend_pg_admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    logging:
+      driver: none
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  pgadmin-data:

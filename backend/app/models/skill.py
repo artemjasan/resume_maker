@@ -1,13 +1,13 @@
 from sqlalchemy import (Column, ForeignKey, Integer, String, Date, UniqueConstraint)
 from sqlalchemy.orm import relationship
 
-from app.database.database import Base
+from .base import Base
 
 
 class Skill(Base):
     __tablename__ = "skills"
     __table_args__ = (
-        UniqueConstraint('name', 'profile_id', name='unique_name_profile'),
+        UniqueConstraint('name', 'profile_id', name='unique_name_profile_skill'),
     )
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
