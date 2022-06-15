@@ -8,6 +8,12 @@ authors = ["Artem Jasan <artjasan@gmail.com>"]
 python = "^3.10"
 fastapi = "pytest"
 uvicorn = "^0.17.6"
+SQLAlchemy = "^1.4.37"
+passlib = "^1.7.4"
+alembic = "^1.8.0"
+email-validator = "^1.2.1"
+psycopg2-binary = "^2.9.3"
+asyncpg = "^0.25.0"
 
 [tool.poetry.dev-dependencies]
 
