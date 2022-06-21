@@ -8,13 +8,18 @@ class UserBase(BaseModel):
     email: EmailStr = ...
 
 
-class UserCreate(UserBase):
-    password: str = Field(..., min_length=8)
-
-
 class UserDB(UserBase):
     id: int = ...
     profiles: list[ProfileDB] = []
 
     class Config:
         orm_mode = True
+
+
+class UserCreate(UserBase):
+    password: str = Field(..., min_length=8)
+
+
+class UserCreateResponse(UserBase):
+    id: int = Field(...)
+

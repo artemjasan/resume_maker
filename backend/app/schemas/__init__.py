@@ -1,4 +1,4 @@
-from .user import UserBase, UserCreate, UserDB
+from .user import UserBase, UserCreate, UserDB, UserCreateResponse
 from .profile import ProfileBase, ProfileCreate, ProfileUpdate, ProfileDB
 from .education import EducationBase, EducationCreate, EducationDB
 from .experience import ExperienceBase, ExperienceCreate, ExperienceDB

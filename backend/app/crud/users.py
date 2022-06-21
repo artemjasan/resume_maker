@@ -1,13 +1,18 @@
-# from sqlalchemy import select, delete, insert
-# from sqlalchemy.orm.exc import NoResultFound
-# from passlib.context import CryptContext
-#
-# from fastapi import HTTPException, status
-# from app.database.database import AsyncSession
-# from app.models.user import User
-# from app.schemas.user import UserCreate, UserDB
-#
-# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from sqlalchemy import select, delete, insert
+from sqlalchemy.orm.exc import NoResultFound
+from passlib.context import CryptContext
+
+from fastapi import HTTPException, status
+from app.database.database import AsyncSession
+from app.models.user import User
+from app import schemas
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+class CRUDUser():
+    pass
+
 #
 #
 # async def get_user_by_email(session: AsyncSession, email: str):
@@ -20,23 +25,14 @@
 #     return users.scalars().all()
 #
 #
-# async def create_user(session: AsyncSession, user: UserCreate):
-#     new_user = User(
-#         username=user.username,
-#         email=user.email,
-#         hashed_password=pwd_context.encrypt(user.password)
-#     )
-#     session.add(new_user)
-#     return new_user
-#     # query = insert(User).values(
-#     #     username=user.username,
-#     #     email=user.email,
-#     #     hashed_password=pwd_context.encrypt(user.password)
-#     # )
-#     # last_record_id = await session.execute(query)
-#     # return last_record_id
-#
-#
+async def create_user(session: AsyncSession, user: schemas.UserCreate) -> schemas.UserDB:
+    new_user = User(
+        username=user.username,
+        email=user.email,
+        hashed_password=pwd_context.encrypt(user.password)
+    )
+    session.add(new_user)
+    return new_user
 # async def delete_user(session: AsyncSession, current_user: UserDB, user_id: int):
 #     try:
 #         query = select(User).where(User.id == user_id)
