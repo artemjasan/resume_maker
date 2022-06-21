@@ -5,7 +5,7 @@ from app.schemas.profile import ProfileDB
 
 class UserBase(BaseModel):
     username: str = Field(..., max_length=50)
-    email: EmailStr = Field(..., max_length=50)
+    email: EmailStr = ...
 
 
 class UserCreate(UserBase):
