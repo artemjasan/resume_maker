@@ -36,16 +36,16 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return db_obj
 
     async def update(
-            self, session: AsyncSession, obj_current: ModelType, obj_in: UpdateSchemaType | dict[str, Any] | ModelType
+            self, session: AsyncSession, obj_current: ModelType, obj_in: UpdateSchemaType | dict[str, Any]
     ) -> ModelType:
         obj_data = jsonable_encoder(obj_current)
         if isinstance(obj_in, dict):
-            updated_date = obj_in
+            updated_data = obj_in
         else:
-            updated_date = obj_in.dict(exclude_unset=True)
+            updated_data = obj_in.dict(exclude_unset=True)
         for field in obj_data:
-            if field in updated_date:
-                setattr(obj_current, field, updated_date[field])
+            if field in updated_data:
+                setattr(obj_current, field, updated_data[field])
         session.add(obj_current)
         await session.commit()
         await session.refresh(obj_current)

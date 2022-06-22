@@ -16,10 +16,16 @@ class UserDB(UserBase):
         orm_mode = True
 
 
+# Properties to receive via API on creation
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8)
 
 
+# Properties to receive via API on creation as response
 class UserCreateResponse(UserBase):
     id: int = Field(...)
 
+
+# Properties to receive via API on update
+class UserUpdate(UserBase):
+    password: str | None = Field(default=None, min_length=8)

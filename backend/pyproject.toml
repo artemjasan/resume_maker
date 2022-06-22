@@ -15,6 +15,7 @@ email-validator = "^1.2.1"
 psycopg2-binary = "^2.9.3"
 asyncpg = "^0.25.0"
 python-multipart = "^0.0.5"
+python-jose = "^3.3.0"
 
 [tool.poetry.dev-dependencies]
 
