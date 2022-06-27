@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Any
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,6 +14,9 @@ class CRUDUser(CRUDBase[User, schemas.UserCreate, schemas.UserUpdate]):
     async def get_by_email(self, session: AsyncSession, email: str) -> User | None:
         response = await session.execute(select(self.model).where(self.model.email == email))
         return response.scalar_one()
+
+    async def get_user_by_id(self, session: AsyncSession, id: int) -> User | None:
+        return await super().get(session, id=id)
 
     async def create(self, session: AsyncSession, obj_in: schemas.UserCreate) -> User:
         db_obj = User(

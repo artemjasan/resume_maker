@@ -52,8 +52,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return obj_current
 
     async def delete(self, session: AsyncSession, id: int) -> ModelType:
-        # TODO: check it, maybe would be better implement it by where and scalars().one()
-        response = await session.execute(select(self.model).get(id))
+        response = await self.get(session=session, id=id)
         await session.delete(response)
         await session.commit()
         return response
