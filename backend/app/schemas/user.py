@@ -6,6 +6,7 @@ from app.schemas.profile import ProfileDB
 class UserBase(BaseModel):
     username: str = Field(..., max_length=50)
     email: EmailStr = ...
+    is_superuser: bool = False
 
 
 class UserDB(UserBase):
@@ -24,6 +25,9 @@ class UserCreate(UserBase):
 # Properties to receive via API on creation as response
 class UserCreateResponse(UserBase):
     id: int = Field(...)
+
+    class Config:
+        orm_mode = True
 
 
 # Properties to receive via API on update

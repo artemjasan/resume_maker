@@ -4,3 +4,4 @@ from .education import EducationBase, EducationCreate, EducationDB
 from .experience import ExperienceBase, ExperienceCreate, ExperienceDB
 from .link import LinkBase, LinkCreate, LinkDB
 from .skill import SkillBase, SkillCreate, SkillDB
+from .token import Token, TokenPayload

@@ -21,7 +21,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     async def get(self, session: AsyncSession, id: int) -> ModelType | None:
         response = await session.execute(select(self.model).where(self.model.id == id))
-        return response.scalar_one()
+        return response.scalar()
 
     async def get_multi(self, session: AsyncSession) -> list[ModelType | None]:
         response = await session.execute(select(self.model).order_by(self.model.id.desc()))
