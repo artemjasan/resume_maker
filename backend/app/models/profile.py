@@ -3,6 +3,8 @@ from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Date
 from sqlalchemy.orm import relationship
 
+from sqladmin import ModelAdmin
+
 from .base import Base
 
 
@@ -23,3 +25,7 @@ class Profile(Base):
     skills = relationship("Skill", back_populates="profile", cascade="all, delete-orphan", lazy="selectin")
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+class ProfileAdmin(ModelAdmin, model=Profile):
+    column_list = [Profile.id, Profile.first_name, Profile.last_name, Profile.user_id]

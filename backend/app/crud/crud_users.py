@@ -51,7 +51,7 @@ class CRUDUser(CRUDBase[models.User, schemas.UserCreate, schemas.UserUpdate]):
             return None
         return act_user
 
-    async def is_superuser(self, current_user: models.User) -> bool:
+    def is_superuser(self, current_user: models.User) -> bool:
         return current_user.is_superuser
 
 

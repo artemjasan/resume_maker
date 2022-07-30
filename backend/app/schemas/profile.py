@@ -1,4 +1,4 @@
-from datetime import date, datetime
+import datetime
 
 from pydantic import BaseModel, Field, validator
 
@@ -9,15 +9,14 @@ class ProfileBase(BaseModel):
     first_name: str = Field(..., max_length=50)
     last_name: str = Field(..., max_length=50)
     middle_name: str = Field(..., max_length=50)
-    birth_day: date = ...
+    birth_day: datetime.date = Field(...)
     bio: str = Field(..., max_length=512)
 
-    @validator("birth_day", pre=True)
+    @validator("birth_day")
     def validate_birth_day(cls, value):
         # TODO: Think about more clever and suitable way to validate birth day
-        # Now its just for example
-        if value > date.today():
-            raise ValueError("Until date can't be without since")
+        if value >= datetime.date.today():
+            raise ValueError("birth day can't be the today's date")
         return value
 
 
@@ -30,7 +29,6 @@ class ProfileUpdate(ProfileBase):
     educations: list[education.EducationDB] = []
     experiences: list[experience.ExperienceDB] = []
     skills: list[skill.SkillDB] = []
-    updated_up: datetime
 
 
 class ProfileDB(ProfileBase):
@@ -40,8 +38,8 @@ class ProfileDB(ProfileBase):
     educations: list[education.EducationDB] = []
     experiences: list[experience.ExperienceDB] = []
     skills: list[skill.SkillDB] = []
-    created_at: datetime
-    updated_up: datetime
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
 
     class Config:
         orm_mode = True

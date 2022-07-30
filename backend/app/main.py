@@ -13,6 +13,7 @@ app = FastAPI(
 )
 admin = Admin(app, engine)
 admin.register_model(models.UserAdmin)
+admin.register_model(models.ProfileAdmin)
 
 app.add_middleware(
     CORSMiddleware,

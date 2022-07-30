@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
     POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
     SQL_ALCHEMY_DATA_BASE_URL: str = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@db:5432/{POSTGRES_DB}"
+    # App constants
+    MAX_USER_PROFILES: int = 3
 
 
 settings = Settings()
